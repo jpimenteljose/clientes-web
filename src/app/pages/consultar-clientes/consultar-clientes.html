@@ -1,0 +1,95 @@
+<div class="card shadow border-0">
+
+    <div class="card-body p-4">
+
+        <h4>Consulta de clientes</h4>
+        <p>Pesquise clientes pelo nome e visualize 
+os resultados abaixo.</p>
+
+        <hr />
+
+        <!-- Formulário de busca -->
+        <form>
+
+            <div class="row align-items-end">
+
+                <!-- Campo de filtro -->
+                <div class="col-md-10 mb-3">
+                    <label class="form-label">Nome do Cliente</label>
+                    <input type="text"class="form-control" placeholder="Digite o nome para pesquisa">
+                </div>
+
+                <!-- Botão de busca -->
+                <div class="col-md-2 mb-3">
+                    <button type="submit"class="btnbtn-primary w-100">
+                        Pesquisar
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+        <hr />
+
+        <!-- Tabela de resultados -->
+        <div class="table-responsive">
+
+            <table class="table table-sm table-hover align-middle">
+                
+                <thead>
+                    <tr>
+                        <th>Nome do Cliente</th>
+                        <th>CPF</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Nível</th>
+                        <th class="text-center">Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <!-- Exemplo de linha -->
+                    <tr>
+                        <td>João da Silva</td>
+                        <td>000.000.000-00</td>
+                        <td>joao@email.com</td>
+                        <td>(21) 99999-9999</td>
+                        <td>Premium</td>
+                        <td class="text-center">
+                            <button class="btnbtn-smbtn-warning me-2">
+                                Editar
+                            </button>
+                            <button class="btnbtn-smbtn-danger">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Outra linha exemplo -->
+                    <tr>
+                        <td>Maria Souza</td>
+                        <td>111.111.111-11</td>
+                        <td>maria@email.com</td>
+                        <td>(21) 98888-8888</td>
+                        <td>Básico</td>
+                        <td class="text-center">
+                            <button class="btnbtn-smbtn-warning me-2">
+                                Editar
+                            </button>
+                            <button class="btnbtn-smbtn-danger">
+                                Excluir
+                            </button>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
