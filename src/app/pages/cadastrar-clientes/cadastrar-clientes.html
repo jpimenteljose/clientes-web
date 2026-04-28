@@ -7,47 +7,91 @@
 
         <hr />
 
-        <form>
+        <form [formGroup]="formCadastro" (ngSubmit)="cadastrarCliente()">   
 
             <div class="row">
 
                 <!-- Nome -->
                 <div class="col-md-12 mb-3">
                     <label class="form-label">Nome do Cliente</label>
-                    <input type="text"class="form-control" placeholder="Digite o nome do cliente">
+                    <input type="text"
+                        formControlName="nome"
+                        class="form-control" 
+                        placeholder="Digite o nome do cliente">
+                    @if(formCadastro.get('nome')?.touched && formCadastro.get('nome')?.invalid) {
+                        <div class="text-danger">
+                            O nome do cliente é obrigatório e deve ter de 6 a 150 caracteres.
+                        </div>
+                    }    
                 </div>
 
                 <!-- CPF -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label">CPF</label>
-                    <input type="text"class="form-control" placeholder="Digite o CPF">
+                    <input type="text"
+                        formControlName="cpf"
+                        class="form-control" 
+                        placeholder="Digite o CPF">
+                    @if(formCadastro.get('cpf')?.touched && formCadastro.get('cpf')?.invalid) {
+                        <div class="text-danger">
+                            O cpf do cliente é obrigatório e deve ter 11 dígitos.
+                        </div>
+                    }    
                 </div>
 
                 <!-- Email -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Email</label>
-                    <input type="email"class="form-control" placeholder="Digite o email">
+                    <input type="email"
+                        formControlName="email"
+                        class="form-control" 
+                        placeholder="Digite o email">
+                    @if(formCadastro.get('email')?.touched && formCadastro.get('email')?.invalid) {
+                        <div class="text-danger">
+                            O email do cliente é obrigatório e deve ser um email válido.
+                        </div>
+                    }    
                 </div>
 
                 <!-- Telefone -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Telefone</label>
-                    <input type="text"class="form-control" placeholder="Digiteo telefone">
+                    <input type="text"
+                        formControlName="telefone"
+                        class="form-control" 
+                        placeholder="Digiteo telefone">
+                    @if(formCadastro.get('Telefone')?.touched && formCadastro.get('Telefone')?.invalid) {
+                        <div class="text-danger">
+                            O telefone do cliente é obrigatório e deve ter 10 ou 11 dígitos.
+                        </div>
+                    }    
                 </div>
 
                 <!--Nível -->
                 <div class="col-md-6 mb-3">
                     <label class="form-label">Nível</label>
-                    <select class="form-select">
-                        <option selecteddisabled>Selecione o nível</option>
+                    <select class="form-select" formControlName="nivel">
+                        <option value="">Selecione o nível</option>
+                        @for(item of niveisCliente(); track item.id) {
+                            <option value="{{ item.id }}">
+                                {{ item.nome }}
+                            </option>        
+                        }
                     </select>
+                    @if(formCadastro.get('nivel')?.touched && formCadastro.get('nivel')?.invalid) {
+                        <div class="text-danger">
+                            O nível do cliente é obrigatório.
+                        </div>
+                    }    
                 </div>
 
             </div>
 
             <!--Botão -->
             <div class="d-flex mt-2">
-                <button type="submit"class="btnbtn-primary px-4">
+                <button type="submit"
+                    [disabled]="formCadastro.invalid"
+                    class="btnbtn-primary px-4">
                     Confirmar Cadastro
                 </button>
             </div>
