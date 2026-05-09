@@ -7,6 +7,21 @@
 
         <hr />
 
+        @if(mensagemSucesso())
+        {
+            <div class="alert alert-success alert-dismissible fade show"role="alert">
+                <strong>Sucesso! </strong>{{ mensagemSucesso() }}
+                <button type="button"class="btn-close"(click)="mensagemSucesso.set('')"aria-label="Close"></button>
+            </div>
+        }
+        @if(mensagemErro())
+        {
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Erro! </strong>{{ mensagemErro() }}
+                <button type="button"class="btn-close" (click)="mensagemErro.set('')" aria-label="Close"></button>
+            </div>
+        }
+
         <form [formGroup]="formCadastro" (ngSubmit)="cadastrarCliente()">   
 
             <div class="row">

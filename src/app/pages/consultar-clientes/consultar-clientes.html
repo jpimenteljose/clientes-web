@@ -3,25 +3,32 @@
     <div class="card-body p-4">
 
         <h4>Consulta de clientes</h4>
-        <p>Pesquise clientes pelo nome e visualize 
-os resultados abaixo.</p>
+        <p>Pesquise clientes pelo nome e visualize os resultados abaixo.</p>
 
         <hr />
 
         <!-- Formulário de busca -->
-        <form>
+        <form [formGroup]="formConsulta" (ngSubmit)="consultarClientes()">
 
             <div class="row align-items-end">
 
                 <!-- Campo de filtro -->
                 <div class="col-md-10 mb-3">
                     <label class="form-label">Nome do Cliente</label>
-                    <input type="text"class="form-control" placeholder="Digite o nome para pesquisa">
+                    <input type="text" formControlName="nome" class="form-control" placeholder="Digite o nome para pesquisa">
+                    
+                    @if(formConsulta.get('nome')?.touched && formConsulta.get('nome')?.invalid) {
+                        <div class="text-danger">
+                            Preencha o nome com pelo menos 3 caracteres para realizar a busca.
+                        </div>
+                    }
+
                 </div>
 
                 <!-- Botão de busca -->
                 <div class="col-md-2 mb-3">
-                    <button type="submit"class="btnbtn-primary w-100">
+                    <button type="submit" class="btn btn-primary w-100"
+                        [disabled]="formConsulta.invalid">
                         Pesquisar
                     </button>
                 </div>
@@ -44,47 +51,57 @@ os resultados abaixo.</p>
                         <th>Email</th>
                         <th>Telefone</th>
                         <th>Nível</th>
+                        <th>Cadastrado em</th>
                         <th class="text-center">Ações</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    <!-- Exemplo de linha -->
-                    <tr>
-                        <td>João da Silva</td>
-                        <td>000.000.000-00</td>
-                        <td>joao@email.com</td>
-                        <td>(21) 99999-9999</td>
-                        <td>Premium</td>
-                        <td class="text-center">
-                            <button class="btnbtn-smbtn-warning me-2">
-                                Editar
-                            </button>
-                            <button class="btnbtn-smbtn-danger">
-                                Excluir
-                            </button>
-                        </td>
-                    </tr>
-
-                    <!-- Outra linha exemplo -->
-                    <tr>
-                        <td>Maria Souza</td>
-                        <td>111.111.111-11</td>
-                        <td>maria@email.com</td>
-                        <td>(21) 98888-8888</td>
-                        <td>Básico</td>
-                        <td class="text-center">
-                            <button class="btnbtn-smbtn-warning me-2">
-                                Editar
-                            </button>
-                            <button class="btnbtn-smbtn-danger">
-                                Excluir
-                            </button>
-                        </td>
-                    </tr>
+                    @for(c of clientes(); track c.id) {
+                        <tr>
+                            <td>{{ c.nome | uppercase }}</td>
+                            <td>{{ c.cpf }}</td>
+                            <td>{{ c.email }}</td>
+                            <td>{{ c.telefone }}</td>
+                            <td>
+                                <span 
+                                    class="badge"
+                                    [ngClass]="{
+                                        'bg-secondary': c.nivel == 1,
+                                        'bg-light text-dark': c.nivel == 2,
+                                        'bg-warning text-dark': c.nivel == 3,
+                                        'bg-info text-dark': c.nivel == 4
+                                    }">
+                                    {{
+                                        c.nivel == 1 ? 'Bronze' :
+                                        c.nivel == 2 ? 'Prata' :
+                                        c.nivel == 3 ? 'Ouro' :
+                                        c.nivel == 4 ? 'Platinum' : ''
+                                    }}
+                                </span>
+                            </td>
+                            <td>{{ c.dataCadastro | date: 'dd/MM/yyyy HH:mm' }}</td>
+                            <td width="140">
+                                <button class="btn btn-outline-primary btn-sm me-1">
+                                    Editar
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm me-1">
+                                    Excluir
+                                </button>
+                            </td>
+                        </tr>
+                    }
 
                 </tbody>
+
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            Quantidade de clientes: {{ clientes().length }}
+                        </td>
+                    </tr>
+                </tfoot>
 
             </table>
 

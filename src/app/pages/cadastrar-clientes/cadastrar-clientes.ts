@@ -21,6 +21,10 @@ export class CadastrarClientes {
   // Instanciar a classe HttpClient
   http = inject(HttpClient);
 
+  // Atributos para exibir mensagens de sucesso ou erro para o usuário
+  mensagemSucesso = signal('');
+  mensagemErro = signal('');
+
   // Formulário para capturar os campos do cadastro do cliente
   formCadastro = new FormGroup({
     nome : new FormControl('', [Validators.required, Validators.minLength(6), Validators.maxLength(150)]),
@@ -43,15 +47,35 @@ export class CadastrarClientes {
 
   // Função para capturar o evento de SUBMIT do formulário
   cadastrarCliente() {
+  
+    // Limpar as mensagens de sucesso ou erro
+    this.mensagemSucesso.set('');
+    this.mensagemErro.set('');
+    
     // console.log(this.formCadastro.value);
+    
     // Fazendo uma requisição POST para a API (cadastro do cliente)
     this.http.post('http://localhost:5258/api/v1/clientes', this.formCadastro.value)
       .subscribe({
-        next : (data) => { // Capturando o retorno de sucesso da API 
-          console.log(data);
+        next : (data:any) => { // Capturando o retorno de sucesso da API 
+          this.mensagemSucesso.set(data.message); // Exibir a mensagem de sucesso para o usuário
+          this.formCadastro.reset(); // Limpar o formulário após o cadastro
+          //console.log(data);
         },
         error : (e) => { // Caturando o retorno de erro da API
-          console.log(e.error );  
+          // Verificando o status do erro
+          switch (e.status) {
+            case 400: // Bad Request - Erro de validação
+              this.mensagemErro.set(e.error.errors.Cpf[0]);
+              break;
+            case 422: // Unprocessable Entity - Erro da validação  
+              this.mensagemErro.set(e.error.message); // Exibir a mensagem de erro para o usuário
+              break;
+            case 500: // Internal Server Erro - Erro no servidor
+              this.mensagemErro.set('Ocorreu um erro no servidor. Por favor, tente novamente mais tarde.'); 
+              break;
+        }  
+          //console.log(e.error );  
         }
       })
   }
