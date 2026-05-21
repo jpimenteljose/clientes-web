@@ -2,13 +2,15 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, signal } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-consultar-clientes',
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './consultar-clientes.html',
   styleUrl: './consultar-clientes.css',
@@ -34,4 +36,19 @@ export class ConsultarClientes {
         this.clientes.set(data as any[]);
       })
   }
+
+  // Função para capturar um evento de exclusão de um cliente
+  excluirCliente(id : string) {
+    if(confirm('Deseja realmente excluir este cliente?')){
+      // Fazendo a requisição para excluir o cliente
+      this.http.delete('http://localhost:5258/api/v1/clientes/' + id)
+        .subscribe((data : any) => {
+          alert(data.message); // Exibe a mensagem de sucesso ou erro retornada pela API
+          this.consultarClientes(); // Recarrega a lista de clientes após a exclusão
+        });
+    }
+  }
+    
+
+  
 }

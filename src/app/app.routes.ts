@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { CadastrarClientes } from './pages/cadastrar-clientes/cadastrar-clientes';
 import { ConsultarClientes } from './pages/consultar-clientes/consultar-clientes';
 import { Dashboard } from './pages/dashboard/dashboard';
+import { EditarClientes } from './pages/editar-clientes/editar-clientes';
 
 export const routes: Routes = [
     {
@@ -11,6 +12,10 @@ export const routes: Routes = [
     {
         path: 'consultar-clientes',  // Rota
         component: ConsultarClientes // Componente
+    },
+    {
+        path: 'editar-clientes/:id', // Rota
+        component: EditarClientes    // Componente
     },
     {
         path: 'dashboard',   // Rota

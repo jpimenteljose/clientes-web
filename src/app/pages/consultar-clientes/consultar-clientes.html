@@ -13,26 +13,29 @@
             <div class="row align-items-end">
 
                 <!-- Campo de filtro -->
-                <div class="col-md-10 mb-3">
+                <div class="col-md-10">
                     <label class="form-label">Nome do Cliente</label>
                     <input type="text" formControlName="nome" class="form-control" placeholder="Digite o nome para pesquisa">
-                    
+                </div>
+
+                <!-- Botão de busca -->
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100" [disabled]="formConsulta.invalid">
+                        Pesquisar
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
                     @if(formConsulta.get('nome')?.touched && formConsulta.get('nome')?.invalid) {
                         <div class="text-danger">
                             Preencha o nome com pelo menos 3 caracteres para realizar a busca.
                         </div>
                     }
 
-                </div>
-
-                <!-- Botão de busca -->
-                <div class="col-md-2 mb-3">
-                    <button type="submit" class="btn btn-primary w-100"
-                        [disabled]="formConsulta.invalid">
-                        Pesquisar
-                    </button>
-                </div>
-
+                </div>    
             </div>
 
         </form>
@@ -66,12 +69,11 @@
                             <td>{{ c.telefone }}</td>
                             <td>
                                 <span 
-                                    class="badge"
-                                    [ngClass]="{
+                                    class="badge" [ngClass]="{
                                         'bg-secondary': c.nivel == 1,
-                                        'bg-light text-dark': c.nivel == 2,
+                                        'bg-primary': c.nivel == 2,
                                         'bg-warning text-dark': c.nivel == 3,
-                                        'bg-info text-dark': c.nivel == 4
+                                        'bg-dark ': c.nivel == 4
                                     }">
                                     {{
                                         c.nivel == 1 ? 'Bronze' :
@@ -83,10 +85,12 @@
                             </td>
                             <td>{{ c.dataCadastro | date: 'dd/MM/yyyy HH:mm' }}</td>
                             <td width="140">
-                                <button class="btn btn-outline-primary btn-sm me-1">
+                                <button [routerLink]="['/editar-clientes', c.id]" 
+                                    class="btn btn-outline-primary btn-sm me-1">
                                     Editar
                                 </button>
-                                <button class="btn btn-outline-danger btn-sm me-1">
+                                <button (click)="excluirCliente(c.id)" 
+                                    class="btn btn-outline-danger btn-sm me-1">
                                     Excluir
                                 </button>
                             </td>

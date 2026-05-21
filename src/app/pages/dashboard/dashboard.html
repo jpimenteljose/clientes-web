@@ -17,7 +17,7 @@ e acompanhe os dados gerais dos clientes.</p>
                         <h6 class="text-muted mb-2">
                             Clientescadastrados
                         </h6>
-                        <h2 class="mb-0">0</h2>
+                        <h2 class="mb-0">{{ resumoQuantitativo().totalClientes }}</h2>
                     </div>
                 </div>
             </div>
@@ -26,7 +26,7 @@ e acompanhe os dados gerais dos clientes.</p>
                 <div class="card border-0 shadow-sm h-100 border-start border-4 border-secondary">
                     <div class="card-body">
                         <h6 class="text-muted mb-2">Bronze</h6>
-                        <h3 class="mb-0">0</h3>
+                        <h3 class="mb-0">{{ resumoQuantitativo().totalBronze }}</h3>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@ e acompanhe os dados gerais dos clientes.</p>
                 <div class="card border-0 shadow-sm h-100 border-start border-4 border-info">
                     <div class="card-body">
                         <h6 class="text-muted mb-2">Prata</h6>
-                        <h3 class="mb-0">0</h3>
+                        <h3 class="mb-0">{{ resumoQuantitativo().totalPrata }}</h3>
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@ e acompanhe os dados gerais dos clientes.</p>
                 <div class="card border-0 shadow-sm h-100 border-start border-4 border-warning">
                     <div class="card-body">
                         <h6 class="text-muted mb-2">Ouro</h6>
-                        <h3 class="mb-0">0</h3>
+                        <h3 class="mb-0">{{ resumoQuantitativo().totalOuro }}</h3>
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@ e acompanhe os dados gerais dos clientes.</p>
                 <div class="card border-0 shadow-sm h-100 border-start border-4 border-dark">
                     <div class="card-body">
                         <h6 class="text-muted mb-2">Platinum</h6>
-                        <h3 class="mb-0">0</h3>
+                        <h3 class="mb-0">{{ resumoQuantitativo().totalPlatinum }}</h3>
                     </div>
                 </div>
             </div>
@@ -61,33 +61,6 @@ e acompanhe os dados gerais dos clientes.</p>
 
         <hr class="my-4" />
 
-        <!-- Espaços para gráficos -->
-        <div class="row g-4">
-
-            <div class="col-lg-8">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body">
-                        <h5 class="mb-3">Evolução de cadastros</h5>
-                        <div class="border rounded d-flex align-items-center justify-content-center bg-light"
-                            style="height: 300px;">
-                            <span class="text-muted">Gráfico 1</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4">
-                <div class="card border-0 shadow-sm h-100">
-                    <div class="card-body">
-                        <h5 class="mb-3">Clientes por nível</h5>
-                        <div class="border rounded d-flex align-items-center justify-content-center bg-light"
-                            style="height: 300px;">
-                            <span class="text-muted">Gráfico 2</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 

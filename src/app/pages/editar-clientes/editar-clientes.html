@@ -2,8 +2,8 @@
 
     <div class="card-body p-4">
 
-        <h4>Cadastro de clientes</h4>
-        <p>Preencha os campos para incluir um cliente.</p>
+        <h4>Edição de clientes</h4>
+        <p>Preencha os campos para alterar os dados do cliente.</p>
 
         <hr />
 
@@ -22,7 +22,7 @@
             </div>
         }
 
-        <form [formGroup]="formCadastro" (ngSubmit)="cadastrarCliente()">   
+        <form [formGroup]="formEdicao" (ngSubmit)="atualizarCliente()">   
 
             <div class="row">
 
@@ -33,7 +33,7 @@
                         formControlName="nome"
                         class="form-control" 
                         placeholder="Digite o nome do cliente">
-                    @if(formCadastro.get('nome')?.touched && formCadastro.get('nome')?.invalid) {
+                    @if(formEdicao.get('nome')?.touched && formEdicao.get('nome')?.invalid) {
                         <div class="text-danger">
                             O nome do cliente é obrigatório e deve ter de 6 a 150 caracteres.
                         </div>
@@ -47,7 +47,7 @@
                         formControlName="cpf"
                         class="form-control" 
                         placeholder="Digite o CPF">
-                    @if(formCadastro.get('cpf')?.touched && formCadastro.get('cpf')?.invalid) {
+                    @if(formEdicao.get('cpf')?.touched && formEdicao.get('cpf')?.invalid) {
                         <div class="text-danger">
                             O cpf do cliente é obrigatório e deve ter 11 dígitos.
                         </div>
@@ -61,7 +61,7 @@
                         formControlName="email"
                         class="form-control" 
                         placeholder="Digite o email">
-                    @if(formCadastro.get('email')?.touched && formCadastro.get('email')?.invalid) {
+                    @if(formEdicao.get('email')?.touched && formEdicao.get('email')?.invalid) {
                         <div class="text-danger">
                             O email do cliente é obrigatório e deve ser um email válido.
                         </div>
@@ -75,7 +75,7 @@
                         formControlName="telefone"
                         class="form-control" 
                         placeholder="Digiteo telefone">
-                    @if(formCadastro.get('Telefone')?.touched && formCadastro.get('Telefone')?.invalid) {
+                    @if(formEdicao.get('Telefone')?.touched && formEdicao.get('Telefone')?.invalid) {
                         <div class="text-danger">
                             O telefone do cliente é obrigatório e deve ter 10 ou 11 dígitos.
                         </div>
@@ -93,7 +93,7 @@
                             </option>        
                         }
                     </select>
-                    @if(formCadastro.get('nivel')?.touched && formCadastro.get('nivel')?.invalid) {
+                    @if(formEdicao.get('nivel')?.touched && formEdicao.get('nivel')?.invalid) {
                         <div class="text-danger">
                             O nível do cliente é obrigatório.
                         </div>
@@ -105,11 +105,12 @@
             <!--Botão -->
             <div class="d-flex mt-2">
                 <button type="submit"
-                    [disabled]="formCadastro.invalid"
+                    [disabled]="formEdicao.invalid"
                     class="btn btn-primary px-4">
-                    Confirmar Cadastro
+                    Atualizar dados
                 </button>
             </div>
         </form>
     </div>
 </div>
+
